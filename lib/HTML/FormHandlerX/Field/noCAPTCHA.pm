@@ -3,6 +3,7 @@ package HTML::FormHandlerX::Field::noCAPTCHA;
 use Moose;
 use Moose::Util::TypeConstraints;
 use LWP::UserAgent;
+use LWP::Protocol::https;
 use JSON qw();
 use namespace::autoclean;
 
