@@ -117,7 +117,7 @@ Example L<Catalyst> controller:
 	my $form = YourApp::HTML::Forms::YourForm->new({ctx => $c});
 	my $params = $c->request->body_parameters;
 	if($form->process($c->req->body_paramseters) {
-    ## Do something with the form.
+		## Do something with the form.
 	} else {
 		## Redisplay form and ask to try again.
 	}
