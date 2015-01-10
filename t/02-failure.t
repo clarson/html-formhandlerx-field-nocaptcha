@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use Test::More;
 use HTML::FormHandler;
-use Data::Dumper;
 
 use_ok('HTML::FormHandlerX::Field::noCAPTCHA');
 
