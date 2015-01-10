@@ -107,30 +107,30 @@ The following is example usage.
 
 In your L<HTML::FormHandler> subclass, "YourApp::HTML::Forms::YourForm":
 
-    has_field 'nocaptcha' => (
-        type=>'noCAPTCHA',
-        site_key=>'[YOUR SITE KEY]',
-        secret_key=>'[YOUR SECRET KEY]',
-    );
+	has_field 'nocaptcha' => (
+		type=>'noCAPTCHA',
+		site_key=>'[YOUR SITE KEY]',
+		secret_key=>'[YOUR SECRET KEY]',
+	);
 
 Example L<Catalyst> controller:
 
-    my $form = YourApp::HTML::Forms::YourForm->new({ctx => $c});
-    my $params = $c->request->body_parameters;
-    if($form->process($c->req->body_paramseters) {
-        ## Do something with the form.
-    } else {
-        ## Redisplay form and ask to try again.
-    }
+	my $form = YourApp::HTML::Forms::YourForm->new({ctx => $c});
+	my $params = $c->request->body_parameters;
+	if($form->process($c->req->body_paramseters) {
+    ## Do something with the form.
+	} else {
+		## Redisplay form and ask to try again.
+	}
 
 Example L<Catalyst> config:
 
-		__PACKAGE__->config(
-			'HTML::FormHandlerX::Field::noCAPTCHA' => {
-				site_key   => '[YOUR SITE KEY]',
-				secret_key => '[YOUR SECRET KEY]-IaHaF3jRN4j340MkGLNw6tcDu',
-			},
-		);
+	__PACKAGE__->config(
+		'HTML::FormHandlerX::Field::noCAPTCHA' => {
+			site_key   => '[YOUR SITE KEY]',
+			secret_key => '[YOUR SECRET KEY]-IaHaF3jRN4j340MkGLNw6tcDu',
+		},
+	);
 
 =head1 FIELD OPTIONS
 
