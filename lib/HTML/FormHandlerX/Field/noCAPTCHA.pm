@@ -123,6 +123,15 @@ Example L<Catalyst> controller:
         ## Redisplay form and ask to try again.
     }
 
+Example L<Catalyst> config:
+
+		__PACKAGE__->config(
+			'HTML::FormHandlerX::Field::noCAPTCHA' => {
+				site_key   => '[YOUR SITE KEY]',
+				secret_key => '[YOUR SECRET KEY]-IaHaF3jRN4j340MkGLNw6tcDu',
+			},
+		);
+
 =head1 FIELD OPTIONS
 
 Support for the following field options, over what is inherited from
