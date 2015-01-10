@@ -24,6 +24,15 @@ Example [Catalyst](https://metacpan.org/pod/Catalyst) controller:
         ## Redisplay form and ask to try again.
     }
 
+Example [Catalyst](https://metacpan.org/pod/Catalyst) config:
+
+                __PACKAGE__->config(
+                        'HTML::FormHandlerX::Field::noCAPTCHA' => {
+                                site_key   => '[YOUR SITE KEY]',
+                                secret_key => '[YOUR SECRET KEY]-IaHaF3jRN4j340MkGLNw6tcDu',
+                        },
+                );
+
 # FIELD OPTIONS
 
 Support for the following field options, over what is inherited from
