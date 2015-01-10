@@ -68,14 +68,13 @@ sub _g_captcha_config {
 
 sub validate {
 	my ($self) = @_;
-	my $answer = $self->form->params->{$self->input_param};
 
   my $ua = LWP::UserAgent->new;
 	$ua->timeout($self->api_timeout);
 
 	my $args = {
 		secret   => $self->secret_key,
-		response => $self->form->params->{$self->input_param},
+		response => $self->value,
 	};
 
 	$args->{remoteip} = $self->remote_address if ($self->remote_address);
