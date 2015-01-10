@@ -6,6 +6,8 @@ use LWP::UserAgent;
 use JSON qw();
 use namespace::autoclean;
 
+# VERSION
+
 extends 'HTML::FormHandler::Field';
 
 has '+widget' => ( default => 'noCAPTCHA' );

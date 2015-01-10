@@ -3,6 +3,8 @@ package HTML::FormHandlerX::Widget::Field::noCAPTCHA;
 use Moose::Role;
 use namespace::autoclean;
 
+# VERSION
+
 sub render_element {
     my ( $self, $result ) = @_;
     $result ||= $self->result;
