@@ -181,7 +181,7 @@ Chuck Larson C<< <clarson@cpan.org> >>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2015, Chuck Larson C<< <clarson@cpan.org> >>
+Copyright 2015, Chuck Larson C<< <chuck+github@endcapsoftwware.com> >>
 
 This projects work sponsered by End Cap Software, LLC.
 L<http://www.endcapsoftware.com>
