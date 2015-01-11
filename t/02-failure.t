@@ -3,8 +3,11 @@ use strict;
 use warnings;
 use Test::More;
 use HTML::FormHandler;
+use Test::Mock::Class ':all';
 
-use_ok('HTML::FormHandlerX::Field::noCAPTCHA');
+mock_class 'Captcha::noCAPTCHA' => 'Captcha::noCAPTCHA::Mock';
+my $mock = Captcha::noCAPTCHA::Mock->new;
+$mock->mock_return( verify => 0 );
 
 my $form = HTML::FormHandler->new(
 	name => 'test_form',
@@ -13,8 +16,8 @@ my $form = HTML::FormHandler->new(
 			type       => 'noCAPTCHA',
 			site_key   => 'fake site key',
 			secret_key => 'fake secret key',
-			api_url    => 'file:t/failure_response.json',
 			remote_address => '127.0.0.1',
+			_nocaptcha => $mock,
 		},
 	],
 );
@@ -28,5 +31,8 @@ ok(!$form->process({'g-recaptcha-response' => 'happy'}),'all happy path');
 @errors = $form->errors;
 cmp_ok(1,'==',scalar @errors);
 cmp_ok('You\'ve failed to prove your Humanity!','eq',$errors[0]);
+
+$mock->mock_tally;
+
 
 done_testing();

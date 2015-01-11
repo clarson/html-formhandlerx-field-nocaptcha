@@ -2,9 +2,7 @@ package HTML::FormHandlerX::Field::noCAPTCHA;
 
 use Moose;
 use Moose::Util::TypeConstraints;
-use LWP::UserAgent;
-use LWP::Protocol::https;
-use JSON qw();
+use Captcha::noCAPTCHA;
 use namespace::autoclean;
 
 # VERSION
@@ -24,6 +22,7 @@ has 'api_timeout' => (is=>'ro', isa=>'Int', required => 1, lazy_build => 1);
 has 'g_captcha_message' => (is=>'ro', isa=>'Str', default=>'You\'ve failed to prove your Humanity!');
 has 'g_captcha_failure_message' => (is=>'ro', isa=>'Str', default=>'We\'ve had trouble processing your request, please try again.');
 has 'config_key' => (is=>'ro', isa=>'Str', default=> __PACKAGE__);
+has '_nocaptcha' => (is=>'ro', isa=>'Captcha::noCAPTCHA', lazy_build => 1);
 
 sub _build_remote_address {
 	my ($self) = @_;
@@ -55,43 +54,37 @@ sub _build_api_timeout {
 	return $config && exists $config->{api_timeout} ? $config->{api_timeout} : 10;
 }
 
-sub _build_fail_open {
-	my ($self) = @_;
-	my $config = $self->_g_captcha_config;
-	return $config && exists $config->{fail_open} ? $config->{fail_open} : 1;
-}
-
 sub _g_captcha_config {
 	my ($self) = @_;
 	return unless ($self->form && $self->form->ctx && $self->form->ctx->config);
 	return $self->form->ctx->config->{$self->config_key};
 }
 
+sub _build__nocaptcha {
+	my ($self) = @_;
+  return Captcha::noCAPTCHA->new({
+		api_url     => $self->api_url,
+		api_timeout => $self->api_timeout,
+		site_key    => $self->site_key,
+		secret_key  => $self->secret_key,
+		theme       => $self->theme,
+	});
+}
+
 sub validate {
 	my ($self) = @_;
 
-  my $ua = LWP::UserAgent->new;
-	$ua->timeout($self->api_timeout);
+  my $cap = $self->_nocaptcha;
 
-	my $args = {
-		secret   => $self->secret_key,
-		response => $self->value,
-	};
+  my $success = $cap->verify( $self->value, $self->remote_address );
 
-	$args->{remoteip} = $self->remote_address if ($self->remote_address);
-
-	my $method = $self->api_url =~ m/^file:/ ? 'get' : 'post';
-  my $response = $ua->$method( $self->api_url, $args );
-
-	if (!$response || !$response->is_success || !$response->content) {
+	if (not defined $success) {
 		$self->add_error($self->g_captcha_failure_message);
 		return;
+	} elsif (!$success) {
+		$self->add_error($self->g_captcha_message);
 	}
 
-	my $json = JSON::decode_json($response->content);
-	my $success = $json->{success};
-
-	$self->add_error($self->g_captcha_message) unless ($success);
 	return;
 }
 

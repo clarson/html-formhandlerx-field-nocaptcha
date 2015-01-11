@@ -3,6 +3,11 @@ use strict;
 use warnings;
 use Test::More;
 use HTML::FormHandler;
+use Test::Mock::Class ':all';
+
+mock_class 'Captcha::noCAPTCHA' => 'Captcha::noCAPTCHA::Mock';
+my $mock = Captcha::noCAPTCHA::Mock->new;
+$mock->mock_return( verify => 1 );
 
 use_ok('HTML::FormHandlerX::Field::noCAPTCHA');
 
@@ -13,8 +18,8 @@ my $form = HTML::FormHandler->new(
 			type       => 'noCAPTCHA',
 			site_key   => 'fake site key',
 			secret_key => 'fake secret key',
-			api_url    => 'file:t/success_response.json',
 			remote_address => '127.0.0.1',
+			_nocaptcha => $mock
 		},
 	],
 );
