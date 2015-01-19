@@ -84,6 +84,7 @@ Default is HTML::FormHandlerX::Field::noCAPTCHA
 The following modules or resources may be of interest.
 
 [HTML::FormHandler](https://metacpan.org/pod/HTML::FormHandler)
+[Captcha::noCAPTCHA](https://metacpan.org/pod/Captcha::noCAPTCHA)
 
 See it in action at [https://www.httpuptime.com](https://www.httpuptime.com)
 

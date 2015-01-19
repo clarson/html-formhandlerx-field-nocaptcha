@@ -176,6 +176,7 @@ Default is HTML::FormHandlerX::Field::noCAPTCHA
 The following modules or resources may be of interest.
 
 L<HTML::FormHandler>
+L<Captcha::noCAPTCHA>
 
 See it in action at L<https://www.httpuptime.com>
 
