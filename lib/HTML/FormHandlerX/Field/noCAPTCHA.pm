@@ -16,6 +16,7 @@ has '+required' => ( default => 1 );
 
 has [qw/site_key secret_key/] => (is=>'rw', isa=>'Str', required => 1,lazy_build => 1);
 has 'theme' => (is=>'ro',isa=> enum([qw(dark light)]),default => 'light');
+has 'noscript' => (is=>'ro',isa=> 'Bool',default => 0);
 has 'remote_address' => (is=>'ro', isa=>'Str', required => 1, lazy_build => 1);
 has 'api_url' => (is=>'ro', isa=>'Str', required => 1, lazy_build => 1);
 has 'api_timeout' => (is=>'ro', isa=>'Int', required => 1, lazy_build => 1);
@@ -68,6 +69,7 @@ sub _build__nocaptcha {
 		site_key    => $self->site_key,
 		secret_key  => $self->secret_key,
 		theme       => $self->theme,
+		noscript    => $self->noscript,
 	});
 }
 
@@ -141,6 +143,10 @@ Required. The secret key you get when you create an account on L<https://www.goo
 =head2 theme
 
 Optional. The color theme of the widget. Options are 'light ' or 'dark' (Default: light)
+
+=head2 noscript
+
+Optional. When true, includes the <noscript> markup in the rendered html. (Default: false)
 
 =head2 remote_address
 
