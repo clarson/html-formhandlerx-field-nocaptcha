@@ -25,12 +25,12 @@ my $expected=<<EOT;
 <div>
 <label for="gcaptcha">Gcaptcha</label>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<div class="g-recaptcha" data-sitekey="fake site key" data-theme="dark"></div>
+<div class="g-recaptcha" data-sitekey="fake site key" data-theme="light"></div>
 
 </div>
 </form>
 EOT
 
-cmp_ok($expected,'cmp',$form->render,'to make sure no unexpected output changes are made');
+is($form->render,$expected,'make sure no unexpected output changes are made');
 
 done_testing();
