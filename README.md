@@ -50,6 +50,10 @@ Required. The secret key you get when you create an account on [https://www.goog
 
 Optional. The color theme of the widget. Options are 'light ' or 'dark' (Default: light)
 
+## noscript
+
+Optional. When true, includes the <noscript> markup in the rendered html. (Default: false)
+
 ## remote\_address
 
 Optional. The user's IP address. Google states this is optional.  If you are using
