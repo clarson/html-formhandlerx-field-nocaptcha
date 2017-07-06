@@ -112,7 +112,7 @@ Example L<Catalyst> controller:
 
 	my $form = YourApp::HTML::Forms::YourForm->new({ctx => $c});
 	my $params = $c->request->body_parameters;
-	if($form->process($c->req->body_paramseters) {
+	if($form->process($c->req->body_parameters) {
 		## Do something with the form.
 	} else {
 		## Redisplay form and ask to try again.
@@ -123,7 +123,7 @@ Example L<Catalyst> config:
 	__PACKAGE__->config(
 		'HTML::FormHandlerX::Field::noCAPTCHA' => {
 			site_key   => '[YOUR SITE KEY]',
-			secret_key => '[YOUR SECRET KEY]-IaHaF3jRN4j340MkGLNw6tcDu',
+			secret_key => '[YOUR SECRET KEY]',
 		},
 	);
 
@@ -184,15 +184,13 @@ The following modules or resources may be of interest.
 L<HTML::FormHandler>
 L<Captcha::noCAPTCHA>
 
-See it in action at L<https://www.httpuptime.com>
-
 =head1 AUTHOR
 
 Chuck Larson C<< <clarson@cpan.org> >>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2015, Chuck Larson C<< <chuck+github@endcapsoftwware.com> >>
+Copyright 2017, Chuck Larson C<< <chuck+github@endcapsoftwware.com> >>
 
 This projects work sponsered by End Cap Software, LLC.
 L<http://www.endcapsoftware.com>
