@@ -9,7 +9,7 @@ sub render_element { return shift->_nocaptcha->html; }
 
 sub render {
 	my ( $self, $result ) = @_;
-	return '' unless ($result);
+	$result ||= $self->result;
 	my $output = $self->_nocaptcha->html;
 	return $self->wrap_field( $result, $output );
 }
