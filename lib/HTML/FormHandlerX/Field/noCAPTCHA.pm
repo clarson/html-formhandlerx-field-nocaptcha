@@ -192,7 +192,7 @@ Chuck Larson C<< <clarson@cpan.org> >>
 
 Copyright 2017, Chuck Larson C<< <chuck+github@endcapsoftwware.com> >>
 
-This projects work sponsered by End Cap Software, LLC.
+This projects work sponsored by End Cap Software, LLC.
 L<http://www.endcapsoftware.com>
 
 Original work by John Napiorkowski C<< <jjnapiork@cpan.org> >>
